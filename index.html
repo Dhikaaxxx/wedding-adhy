@@ -716,12 +716,25 @@ ucapan:document.getElementById("ucapan").value,
 waktu:new Date().toLocaleString()
 };
 
-let tamu =
-JSON.parse(localStorage.getItem("tamu")) || [];
+document.getElementById("rsvpForm")
+.addEventListener("submit", async function(e){
 
-tamu.push(data);
+e.preventDefault();
 
-localStorage.setItem("tamu",JSON.stringify(tamu));
+const data = {
+nama:document.getElementById("nama").value,
+hadir:document.getElementById("hadir").value,
+ucapan:document.getElementById("ucapan").value,
+waktu:new Date().toLocaleString()
+};
+
+await fetch(
+"https://script.google.com/macros/s/AKfycbz_qgTf6xXgK60n1MIHs8blMEvykzobcf1OH_8rIalAEqod0K3fauPLwyDvwpAZc03ACA/exec",
+{
+method:"POST",
+body:JSON.stringify(data)
+}
+);
 
 alert("RSVP berhasil dikirim ❤️");
 
