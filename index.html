@@ -622,18 +622,20 @@ class="wa"
 </button>
 
 <audio id="audio" loop>
-<source src="https://files.catbox.moe/8g8k8x.mp3" type="audio/mpeg">
+<source src="https://cdn.pixabay.com/audio/2022/03/15/audio_c8c8a73467.mp3" type="audio/mpeg">
 </audio>
 
 <script>
 
 /* loading */
 
-window.onload = () => {
 setTimeout(()=>{
-document.getElementById("loader").style.display="none";
-},2000);
+const loader = document.getElementById("loader");
+
+if(loader){
+loader.style.display = "none";
 }
+},2500);
 
 /* particles */
 
