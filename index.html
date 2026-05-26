@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Adhy & Risky Wedding</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Cormorant+Garamond:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+scroll-behavior:smooth;
+}
+
+body{
+font-family:'Poppins',sans-serif;
+background:#0f0c09;
+color:white;
+overflow-x:hidden;
+}
+
+/* loading */
+
+#loader{
+position:fixed;
+inset:0;
+background:#0f0c09;
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:99999;
+flex-direction:column;
+}
+
+.loader-ring{
+width:90px;
+height:90px;
+border:3px solid rgba(212,175,55,.2);
+border-top:3px solid #d4af37;
+border-radius:50%;
+animation:spin 1s linear infinite;
+margin-bottom:20px;
+}
+
+@keyframes spin{
+100%{
+transform:rotate(360deg);
+}
+}
+
+/* gold particles */
+
+.particle{
+position:fixed;
+top:-10px;
+width:8px;
+height:8px;
+background:#d4af37;
+border-radius:50%;
+opacity:.7;
+animation:fall linear infinite;
+z-index:1;
+}
+
+@keyframes fall{
+to{
+transform:translateY(110vh);
+}
+}
+
+/* hero */
+
+.hero{
+height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+padding:20px;
+position:relative;
+background:
+linear-gradient(to bottom,
+rgba(0,0,0,.6),
+rgba(0,0,0,.8)),
+url('https://images.unsplash.com/photo-1522673607200-164d1b6ce486?q=80&w=1200');
+background-size:cover;
+background-position:center;
+}
+
+.hero::before{
+content:"";
+position:absolute;
+inset:0;
+background:radial-gradient(circle,#d4af3720 0%,transparent 70%);
+}
+
+.hero-content{
+position:relative;
+z-index:2;
+animation:fadeUp 1.5s ease;
+}
+
+@keyframes fadeUp{
+from{
+opacity:0;
+transform:translateY(40px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+.subtitle{
+letter-spacing:8px;
+font-size:13px;
+color:#e7c66d;
+margin-bottom:20px;
+}
+
+.title{
+font-family:'Cormorant Garamond',serif;
+font-size:78px;
+font-weight:600;
+}
+
+.title span{
+color:#d4af37;
+}
+
+.date{
+margin-top:15px;
+font-size:18px;
+color:#f4e6bf;
+}
+
+.btn{
+display:inline-block;
+margin-top:35px;
+padding:16px 38px;
+background:#d4af37;
+color:black;
+text-decoration:none;
+border-radius:50px;
+font-weight:600;
+transition:.3s;
+}
+
+.btn:hover{
+transform:scale(1.05);
+}
+
+/* section */
+
+.section{
+padding:100px 20px;
+position:relative;
+z-index:2;
+}
+
+.container{
+max-width:1100px;
+margin:auto;
+}
+
+.section-title{
+font-size:55px;
+text-align:center;
+margin-bottom:50px;
+font-family:'Cormorant Garamond',serif;
+color:#d4af37;
+}
+
+/* guest */
+
+.guest{
+text-align:center;
+margin-top:30px;
+font-size:22px;
+color:#fff;
+}
+
+/* cards */
+
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:25px;
+}
+
+.card{
+background:rgba(255,255,255,.05);
+backdrop-filter:blur(20px);
+border:1px solid rgba(212,175,55,.2);
+padding:40px;
+border-radius:35px;
+transition:.4s;
+}
+
+.card:hover{
+transform:translateY(-10px);
+}
+
+/* gallery */
+
+.gallery{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+}
+
+.gallery img{
+width:100%;
+height:320px;
+object-fit:cover;
+border-radius:25px;
+transition:.4s;
+}
+
+.gallery img:hover{
+transform:scale(1.04);
+}
+
+/* countdown */
+
+.countdown{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+gap:20px;
+margin-top:40px;
+}
+
+.box{
+background:#17120e;
+padding:35px;
+border-radius:25px;
+text-align:center;
+border:1px solid rgba(212,175,55,.2);
+}
+
+.box h2{
+font-size:50px;
+color:#d4af37;
+}
+
+/* rsvp */
+
+form{
+max-width:700px;
+margin:auto;
+}
+
+.input{
+width:100%;
+padding:18px;
+margin-bottom:20px;
+border:none;
+border-radius:18px;
+background:#17120e;
+color:white;
+}
+
+.submit{
+width:100%;
+padding:18px;
+border:none;
+background:#d4af37;
+border-radius:18px;
+font-weight:600;
+cursor:pointer;
+}
+
+/* envelope */
+
+.envelope{
+background:#17120e;
+padding:40px;
+border-radius:30px;
+max-width:500px;
+margin:auto;
+text-align:center;
+border:1px solid rgba(212,175,55,.2);
+}
+
+.copy-btn{
+margin-top:20px;
+padding:14px 30px;
+border:none;
+background:#d4af37;
+border-radius:40px;
+font-weight:600;
+cursor:pointer;
+}
+
+/* wa */
+
+.wa{
+position:fixed;
+bottom:25px;
+right:25px;
+background:#25D366;
+width:65px;
+height:65px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:28px;
+text-decoration:none;
+z-index:999;
+}
+
+/* music */
+
+.music{
+position:fixed;
+bottom:105px;
+right:25px;
+width:60px;
+height:60px;
+border:none;
+border-radius:50%;
+background:#d4af37;
+font-size:22px;
+z-index:999;
+}
+
+/* footer */
+
+footer{
+padding:60px 20px;
+text-align:center;
+background:#090705;
+color:#d9c08b;
+}
+
+@media(max-width:768px){
+
+.title{
+font-size:55px;
+}
+
+.section-title{
+font-size:42px;
+}
+
+}
+
+</style>
+</head>
+<body>
+
+<!-- loading -->
+
+<div id="loader">
+
+<div class="loader-ring"></div>
+
+<p style="color:#d4af37;">
+Loading Invitation...
+</p>
+
+</div>
+
+<!-- particles -->
+
+<div id="particles"></div>
+
+<!-- HERO -->
+
+<section class="hero">
+
+<div class="hero-content">
+
+<p class="subtitle">
+THE WEDDING OF
+</p>
+
+<h1 class="title">
+Adhy <span>&</span> Risky
+</h1>
+
+<p class="date">
+20 Desember 2026
+</p>
+
+<div class="guest">
+Kepada Yth.
+<br>
+<span id="guestName">Tamu Undangan</span>
+</div>
+
+<a href="#open" class="btn">
+Buka Undangan
+</a>
+
+</div>
+
+</section>
+
+<!-- OPENING -->
+
+<section class="section" id="open">
+
+<div class="container">
+
+<h2 class="section-title">
+Wedding Event
+</h2>
+
+<div class="cards">
+
+<div class="card">
+<h3>Akad & Resepsi</h3>
+<br>
+<p>
+Minggu, 20 Desember 2026
+<br><br>
+09.00 WIB - selesai
+</p>
+</div>
+
+<div class="card">
+<h3>Lokasi</h3>
+<br>
+<p>
+Malioboro, Yogyakarta
+</p>
+
+<br>
+
+<img
+src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https://maps.google.com"
+style="border-radius:20px;"
+>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- COUNTDOWN -->
+
+<section class="section">
+
+<div class="container">
+
+<h2 class="section-title">
+Countdown
+</h2>
+
+<div class="countdown">
+
+<div class="box">
+<h2 id="days">0</h2>
+<p>Hari</p>
+</div>
+
+<div class="box">
+<h2 id="hours">0</h2>
+<p>Jam</p>
+</div>
+
+<div class="box">
+<h2 id="minutes">0</h2>
+<p>Menit</p>
+</div>
+
+<div class="box">
+<h2 id="seconds">0</h2>
+<p>Detik</p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- GALLERY -->
+
+<section class="section">
+
+<div class="container">
+
+<h2 class="section-title">
+Gallery
+</h2>
+
+<div class="gallery">
+
+<img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?q=80&w=900">
+
+<img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=900">
+
+<img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=900">
+
+</div>
+
+</div>
+
+</section>
+
+<!-- RSVP -->
+
+<section class="section">
+
+<div class="container">
+
+<h2 class="section-title">
+RSVP & Guest Book
+</h2>
+
+<form id="rsvpForm">
+
+<input
+type="text"
+class="input"
+placeholder="Nama Lengkap"
+required
+id="nama"
+>
+
+<select class="input" id="hadir">
+
+<option>Hadir</option>
+<option>Tidak Hadir</option>
+
+</select>
+
+<textarea
+class="input"
+placeholder="Ucapan & Doa"
+rows="5"
+id="ucapan"
+></textarea>
+
+<button class="submit">
+Kirim RSVP
+</button>
+
+</form>
+
+</div>
+
+</section>
+
+<!-- ENVELOPE -->
+
+<section class="section">
+
+<div class="container">
+
+<h2 class="section-title">
+Amplop Digital
+</h2>
+
+<div class="envelope">
+
+<h3>DANA / GOPAY</h3>
+
+<br>
+
+<p style="font-size:24px;color:#d4af37;">
+083896682281
+</p>
+
+<br>
+
+<p>
+a/n SULXXXX/DHXXXX
+</p>
+
+<button class="copy-btn" onclick="copyRek()">
+Salin Nomor
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- FOOTER -->
+
+<footer>
+
+<h2 style="font-size:45px;font-family:'Cormorant Garamond',serif;">
+Adhy & Risky
+</h2>
+
+<br>
+
+<p>
+Terima kasih atas doa & kehadirannya
+</p>
+
+</footer>
+
+<!-- whatsapp -->
+
+<a
+href="https://wa.me/6283896682281"
+target="_blank"
+class="wa"
+>
+💬
+</a>
+
+<!-- music -->
+
+<button class="music" onclick="toggleMusic()">
+🎵
+</button>
+
+<audio id="audio" loop>
+<source src="https://files.catbox.moe/8g8k8x.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+
+/* loading */
+
+window.onload = () => {
+setTimeout(()=>{
+document.getElementById("loader").style.display="none";
+},2000);
+}
+
+/* particles */
+
+for(let i=0;i<40;i++){
+
+let p=document.createElement("div");
+
+p.classList.add("particle");
+
+p.style.left=Math.random()*100+"vw";
+
+p.style.animationDuration=
+(5+Math.random()*5)+"s";
+
+p.style.opacity=Math.random();
+
+document.body.appendChild(p);
+
+}
+
+/* guest */
+
+const params = new URLSearchParams(window.location.search);
+
+const guest = params.get("to");
+
+if(guest){
+document.getElementById("guestName").innerText = guest;
+}
+
+/* countdown */
+
+const targetDate = new Date("December 20, 2026 00:00:00").getTime();
+
+setInterval(()=>{
+
+const now = new Date().getTime();
+
+const distance = targetDate - now;
+
+document.getElementById("days").innerHTML =
+Math.floor(distance / (1000*60*60*24));
+
+document.getElementById("hours").innerHTML =
+Math.floor((distance%(1000*60*60*24))/(1000*60*60));
+
+document.getElementById("minutes").innerHTML =
+Math.floor((distance%(1000*60*60))/(1000*60));
+
+document.getElementById("seconds").innerHTML =
+Math.floor((distance%(1000*60))/1000);
+
+},1000);
+
+/* music */
+
+const audio = document.getElementById("audio");
+
+function toggleMusic(){
+
+if(audio.paused){
+audio.play();
+}else{
+audio.pause();
+}
+
+}
+
+/* rsvp */
+
+document.getElementById("rsvpForm")
+.addEventListener("submit",function(e){
+
+e.preventDefault();
+
+const data = {
+nama:document.getElementById("nama").value,
+hadir:document.getElementById("hadir").value,
+ucapan:document.getElementById("ucapan").value,
+waktu:new Date().toLocaleString()
+};
+
+let tamu =
+JSON.parse(localStorage.getItem("tamu")) || [];
+
+tamu.push(data);
+
+localStorage.setItem("tamu",JSON.stringify(tamu));
+
+alert("RSVP berhasil dikirim ❤️");
+
+document.getElementById("rsvpForm").reset();
+
+});
+
+/* copy rekening */
+
+function copyRek(){
+
+navigator.clipboard.writeText("083896682281");
+
+alert("Nomor berhasil disalin");
+
+}
+
+</script>
+
+</body>
+</html>
